@@ -151,4 +151,13 @@ export class PlacemarkService {
       return [];
     }
   }
+
+  async storeImage(image_url) {
+    try {
+     const response = await axios.post(this.baseUrl + "/api/visit/image", image_url);
+      return response.data;
+    } catch (error) {
+      return [];
+    }
+  }
 }

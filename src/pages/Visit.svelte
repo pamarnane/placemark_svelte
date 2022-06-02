@@ -1,6 +1,8 @@
 <script>
   import VisitTable from "../components/VisitTable.svelte";
   import WelcomeMenu from "../components/WelcomeMenu.svelte";
+  import VisitChart from "../components/VisitCharts.svelte";
+  import PlacemarkImage from "../components/PlacemarkImage.svelte";
   import { getContext, onMount } from "svelte";
   
   const placemarkService = getContext("PlacemarkService");
@@ -13,10 +15,13 @@
 
   let activities = [];
   let visits = [];
+  let visitChart = null;
 
-  let id = "";
   export let params = {}
 
+  function visitAdded(event) {
+    visitChart.refreshChart();
+  }
 
   async function logVisit() {
     const visit = {
@@ -29,23 +34,22 @@
     if (success) {
       visits = await placemarkService.getPlacemarkVisits(params.id);
       let selectedActivity = "";
-    let date = "";
-    let description = "";
+      let date = "";
+      let description = "";
+      visitChart.refreshChart(visit);
     } else {
       errorMessage = "Error retrieving visits";
     }
   }
 
   onMount(async () => {
-    // visits = await placemarkService.getAllVisits();
     visits = await placemarkService.getPlacemarkVisits(params.id);
     activities = await placemarkService.getActivities();
-    console.log(activities);
   });
-
 </script>
 
 <WelcomeMenu/>
+<VisitChart bind:this={visitChart} id={params.id}/>
 
 <section class="section columns is-vcentered">
   <div class="column has-text-centered">
@@ -86,7 +90,7 @@
       </div>
     </section>
   </div>
-<!--   <div class="column">
-    {{> placemark-image }} 
-  </div> -->
 </section>
+
+<PlacemarkImage placemark_id={params.id}/>
+

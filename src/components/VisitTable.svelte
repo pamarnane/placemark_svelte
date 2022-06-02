@@ -6,7 +6,6 @@
 
    onMount(async () => {
     visits
-    console.log(visits);
   });
 
 </script>

@@ -1,10 +1,8 @@
 <script>
   import AddPlacemarkForm from "../components/AddPlacemarkForm.svelte";
-  // import PlacemarkTable from "../components/PlacemarkTable.svelte";
   import WelcomeMenu from "../components/WelcomeMenu.svelte";
   import {getContext, onMount} from 'svelte';
   import PlacemarkMap from "../components/PlacemarkMap.svelte"
- // import { decodeToken } from "../services/jwt-utils.js";
 
   const placemarkService = getContext("PlacemarkService");
   let placemarks = [];
@@ -12,7 +10,11 @@
   let obj = JSON.parse(localStorage.placemark);
   let userID = obj.userID;
 
-//  let userID = decodeToken(obj.token)
+  let placemarkMap = null;
+
+  function placemarkAdded(event) {
+    placemarkMap.addPlacemarkMarker(event.detail.placemark);
+  }
 
   async function deletePlacemark(id) {
     await placemarkService.deletePlacemark(id);
@@ -20,26 +22,14 @@
   }
 
   onMount(async () => {
-   // placemarks = await placemarkService.getPlacemarks();
    placemarks = await placemarkService.getUserPlacemarks(userID);
   });
 </script>
 
 
-<section class="section">
-  <WelcomeMenu/>
-</section>
-
-<PlacemarkMap/>
-
-<section class="section">
-  <AddPlacemarkForm bind:value={placemarks}/>
-  <!-- <PlacemarkTable/> -->
-</section>
-
-<!-- <script>
-
-</script> -->
+<WelcomeMenu/>
+<PlacemarkMap bind:this={placemarkMap}/>
+<AddPlacemarkForm bind:value={placemarks} on:message={placemarkAdded}/>
 
 <table class="table is-fullwidth">
   <thead>

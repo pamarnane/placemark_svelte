@@ -9,11 +9,14 @@
       zoom: 7,
       minZoom: 1,
     };
+    let map =null;
+    
+    
   
     onMount(async () => {
         const categories = await placemarkService.getCategories();
 
-        const map = new LeafletMap("placemark-map", mapConfig);
+        map = new LeafletMap("placemark-map", mapConfig);
         map.showZoomControl();
         categories.forEach((category) => {        
             map.addLayerGroup(category.category);
@@ -22,10 +25,14 @@
         map.showLayerControl();
 
         const placemarks = await placemarkService.getPlacemarks();
-        placemarks.forEach(placemarks => {
-        map.addMarker({lat: placemarks.latitude, lng: placemarks.longitude}, placemarks.name, placemarks.category);
+        placemarks.forEach(placemark => {
+        addPlacemarkMarker(placemark);
         });
     })
+
+    export function addPlacemarkMarker(placemark) {
+        map.addMarker({lat: placemark.latitude, lng: placemark.longitude}, placemark.name, placemark.category);
+    }
 </script>
   
 <div class="box" id="placemark-map" style="height:800px">

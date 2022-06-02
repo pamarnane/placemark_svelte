@@ -1,17 +1,16 @@
 <script>
-    import {getContext, onMount} from "svelte";
+    import {createEventDispatcher, getContext, onMount} from "svelte";
     import { user } from "../stores.js"
 
     const placemarkService = getContext("PlacemarkService");
+    const dispatch = createEventDispatcher();
 
     export let value = {};
 
     let name = "";
     let description = "";
-    
     let categories = [];
     let selectedCategory = "";
-
     let latitude = 0.0;
     let longitude = 0.0;
 
@@ -23,6 +22,7 @@
     });
 
     async function addPlacemark() {
+        let message = "";
         const placemark = {
             name: name,
             category: selectedCategory,
@@ -33,10 +33,12 @@
         };
     
         const success = await placemarkService.addPlacemark(placemark);
-        value = await placemarkService.getUserPlacemarks(userID);
         if (!success) {  
             return;
-        }
+        } 
+        value = await placemarkService.getUserPlacemarks(userID);
+        message = "Placemark successfully added";
+        dispatch("message",{placemark: placemark,});
     }   
 </script>
 

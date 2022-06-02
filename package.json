@@ -18,6 +18,7 @@
     "dotenv": "^16.0.1",
     "jsonwebtoken": "^8.5.1",
     "leaflet": "^1.8.0",
+    "svelte-frappe-charts": "^1.9.2",
     "svelte-spa-router": "^3.2.0"
   }
 }
