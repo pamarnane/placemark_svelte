@@ -54,25 +54,6 @@
     </div>
     <section class="section">
       <VisitTable visits="{visits}"/>
-      <!-- <table class="table is-fullwidth">
-        <thead>
-          <tr>
-            <th><abbr title="Activity">Activity</abbr></th>
-            <th><abbr title="Date">Date</abbr></th>
-            <th><abbr title="Description">Description</abbr></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each visits as visit}
-            <tr>
-              <td>{visit.activity}</td>
-              <td>{visit.date}</td>
-              <td>{visit.description}</td>
-            </tr>
-          {/each}
-        </tbody>
-      </table> -->
     </section>
     <section class="section">
       <div class="box">
@@ -81,7 +62,7 @@
             <div class="field-body">
               <div class="field">
                 <label for="activity" class="label">Activity</label>
-                <div class="select">
+                <div class="select is-fullwidth">
                   <select bind:value={selectedActivity}>
                     {#each activities as activity}
                       <option>{activity.activity}</option>

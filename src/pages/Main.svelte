@@ -2,6 +2,7 @@
   import WelcomeMenu from "../components/WelcomeMenu.svelte";
  // import TitleBar from "../components/TitleBar.svelte";
   import {getContext} from "svelte";
+  import PlacemarkMap from "../components/PlacemarkMap.svelte"
 
   const placemarkService = getContext("PlacemarkService");
   placemarkService.logout();
@@ -14,6 +15,8 @@
 <section class="section">
   <p> Sign up or Log in... </p>
 </section>
+
+<PlacemarkMap/>
 
 
 

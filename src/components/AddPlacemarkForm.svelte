@@ -20,7 +20,6 @@
 
     onMount(async () => {
         categories = await placemarkService.getCategories();
-        console.log(categories);
     });
 
     async function addPlacemark() {
@@ -55,6 +54,12 @@
                         {/each}
                     </select>
                 </div>
+        </div>
+        <div class="column">
+            <label class="label"  for="latitude">Latitude</label> <input bind:value={latitude} class="input" type="number" step="0.001" placeholder="Enter latitude" name="latitude">
+        </div>
+        <div class="column">
+            <label class="label" for="longitude">Longitude</label> <input bind:value={longitude} class="input" type="number" step="0.001" placeholder="Enter longitude" name="longitude">
         </div>
         <div class="column">
             <label class="label" for="description">Description</label> <input bind:value={description} class="input" type="text" placeholder="Enter placemark description" name="description">
