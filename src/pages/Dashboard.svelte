@@ -3,6 +3,7 @@
   import WelcomeMenu from "../components/WelcomeMenu.svelte";
   import {getContext, onMount} from 'svelte';
   import PlacemarkMap from "../components/PlacemarkMap.svelte"
+import { push } from "svelte-spa-router";
 
   const placemarkService = getContext("PlacemarkService");
   let placemarks = [];
@@ -14,6 +15,10 @@
 
   function placemarkAdded(event) {
     placemarkMap.addPlacemarkMarker(event.detail.placemark);
+  }
+
+  async function openVisits(placemark) {
+    push("/visit/" + placemark._id + "/" + placemark.name);
   }
 
   async function deletePlacemark(id) {
@@ -50,7 +55,9 @@
         <td>
         <div class="field is-grouped" >
           <p class="control">
-            <a class="button" id="visit" href="/#/visit/{placemark._id}"> Open Logs </a>
+            <!-- <a class="button" id="visit" href="/#/visit/{placemark._id}"> Open Logs </a> -->
+            <button on:click|once={openVisits(placemark)} class="button"><span>Open Visits</span>
+
           </p>
           <p>
               <button on:click|once={deletePlacemark(placemark._id)} class="button is-danger is-outlined"><span>Delete</span><span class="icon is-small"><i class="fas fa-times"></i></span></button>

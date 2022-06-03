@@ -15,7 +15,7 @@
     "/login": Login,
     "/signup": Signup,
     "/dashboard": Dashboard,
-    "/visit/:id": Visit,
+    "/visit/:id/:name?": Visit,
     "/logout": Main,
   }
 </script>

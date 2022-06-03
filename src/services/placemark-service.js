@@ -89,6 +89,15 @@ export class PlacemarkService {
     }
   }
 
+  async getPlacemarkById(id) {
+    try {
+      const response = await axios.get(this.baseUrl + "/api/placemarks/" + id);
+      return response.data;
+    } catch (error) {
+      return [];
+    }
+  }
+
   async getUserPlacemarks(userID) {
     try {
       const response = await axios.get(this.baseUrl + "/api/placemarks/user/" + userID);
@@ -160,4 +169,13 @@ export class PlacemarkService {
       return [];
     }
   }
+
+  async deleteImage(id) {
+    try {
+     const response = await axios.delete(this.baseUrl + "/api/visit/image/" + id);
+      return response.data;
+    } catch (error) {
+      return [];
+    }
+  }spo
 }

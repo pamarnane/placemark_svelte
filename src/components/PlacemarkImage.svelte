@@ -10,8 +10,9 @@
  /* const unsignedUploadPreset = process.env.cloudinary_preset */
 
   export let multiple = false
-  export let placemark_id;
-  let url_render = ""
+  export let id;
+  let url_render = "";
+  let publicid = "";
 
   function handleUpload(event){
       if(multiple ){
@@ -22,11 +23,12 @@
           uploadFile(event.target.files[0] , 1)
       }
   }
-
-/*   onMount(async () => {
-    placemark = await placemarkService.getPlacemarkVisits(params.id);
-    activities = await placemarkService.getActivities();
-  }); */
+ 
+  onMount(async () => {
+    let placemark = await placemarkService.getPlacemarkById(id);
+    url_render = placemark.img;
+    publicid = placemark.publicid;    
+  });
 
   async function uploadFile(file ,  length){
       var formdata = new FormData();
@@ -39,21 +41,35 @@
           body: formdata
       })
       response = await response.json()
+      publicid = response.url;
+      url_render = response.url;
       const image = {
-        image_url: response.url,
-        id: placemark_id,        
+        url: response.url,
+        publicid: response.public_id,
+        id: id,        
       }
       response = await placemarkService.storeImage(image)
-      url_render = response.img;
+
   }
+  
+  async function deleteImage(url_publicid){
+    //let placemark = await placemarkService.getPlacemarkById(placemark_id);
+    let response = await placemarkService.deleteImage(id)
+    url_render = ""
+
+  }
+
+  //$: url_render
 </script>
 
 <div class="card">
-  <div class="card-image">
-    <figure class="image is-256x256">
-      <img src={url_render}>
-    </figure>
-  </div>
+  {#if url_render.length > 3}
+    <div class="card-image">
+      <figure class="image is-256x256">
+        <img src={url_render}>
+      </figure>
+    </div>
+  {/if}
   <div class="card-content">
     <section class="section">
       <div class="box">
@@ -70,6 +86,11 @@
             </span>
           </label>
         </div>
+        <p>
+          {#if url_render.length > 3}
+            <button on:click|once={deleteImage(url_render)} class="button is-danger is-outlined"><span>Delete</span><span class="icon is-small"><i class="fas fa-times"></i></span></button>
+          {/if}
+      </p>
       </div>
     </section>
   </div>

@@ -13,6 +13,7 @@
 
   let errorMessage = "";
 
+  let placemark = null;
   let activities = [];
   let visits = [];
   let visitChart = null;
@@ -43,19 +44,21 @@
   }
 
   onMount(async () => {
+    placemark = await placemarkService.getPlacemarkById(params.id);
+    console.log(placemark);
     visits = await placemarkService.getPlacemarkVisits(params.id);
     activities = await placemarkService.getActivities();
   });
 </script>
 
 <WelcomeMenu/>
+<div class="container">
+  <h1 class="title">{params.name}</h1>
+</div>
 <VisitChart bind:this={visitChart} id={params.id}/>
 
 <section class="section columns is-vcentered">
   <div class="column has-text-centered">
-    <div class="content">
-     <!-- <h1>{placemark.name}</h1> -->
-    </div>
     <section class="section">
       <VisitTable visits="{visits}"/>
     </section>
@@ -92,5 +95,5 @@
   </div>
 </section>
 
-<PlacemarkImage placemark_id={params.id}/>
+<PlacemarkImage id={params.id}/>
 
