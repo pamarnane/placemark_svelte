@@ -31,12 +31,12 @@
   });
 
   async function uploadFile(file ,  length){
-      var formdata = new FormData();
+      let formdata = new FormData();
       formdata.append("file", file , file.name)
       formdata.append('upload_preset', unsignedUploadPreset);
-      formdata.append('tags', 'browser_upload'); // Optional - add tag for image admin in Cloudinary
-      var url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
-      var response = await fetch(url, {
+      formdata.append('tags', 'browser_upload');
+      let url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+      let response = await fetch(url, {
           method: 'POST', 
           body: formdata
       })
@@ -49,21 +49,17 @@
         id: id,        
       }
       response = await placemarkService.storeImage(image)
-
-  }
+  };
   
   async function deleteImage(url_publicid){
-    //let placemark = await placemarkService.getPlacemarkById(placemark_id);
     let response = await placemarkService.deleteImage(id)
     url_render = ""
+  };
 
-  }
-
-  //$: url_render
 </script>
 
 <div class="card">
-  {#if url_render.length > 3}
+  {#if url_render}
     <div class="card-image">
       <figure class="image is-256x256">
         <img src={url_render}>
@@ -87,7 +83,7 @@
           </label>
         </div>
         <p>
-          {#if url_render.length > 3}
+          {#if url_render}
             <button on:click|once={deleteImage(url_render)} class="button is-danger is-outlined"><span>Delete</span><span class="icon is-small"><i class="fas fa-times"></i></span></button>
           {/if}
       </p>

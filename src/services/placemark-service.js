@@ -143,6 +143,16 @@ export class PlacemarkService {
     }
   }
 
+  async getPlacemarkWeather(id) {
+    try {
+      const response = await axios.get(this.baseUrl + "/api/placemarks/" + id + "/weather");
+      return response.data;
+  
+    } catch (error) {
+      return [];
+    }
+  }
+
   async getActivities() {
     try {
       const response = await axios.get(this.baseUrl + "/api/placemarks/activities");
@@ -177,5 +187,5 @@ export class PlacemarkService {
     } catch (error) {
       return [];
     }
-  }spo
+  }
 }

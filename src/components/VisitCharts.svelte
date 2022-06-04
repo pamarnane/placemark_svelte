@@ -48,5 +48,5 @@
     });
 </script>
   <div>
-      <Chart data={data} type="bar" />
+      <Chart data={data} type="bar" title="Logged Activies By Type" />
   </div>

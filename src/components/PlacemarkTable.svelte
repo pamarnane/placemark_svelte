@@ -11,7 +11,6 @@
 
     onMount(async () => {
         placemarks = await placemarkService.getPlacemarks();
-        console.log(placemarks);
     });
 </script>
 

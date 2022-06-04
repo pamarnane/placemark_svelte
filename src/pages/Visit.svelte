@@ -1,7 +1,9 @@
 <script>
-  import VisitTable from "../components/VisitTable.svelte";
   import WelcomeMenu from "../components/WelcomeMenu.svelte";
+  import VisitTable from "../components/VisitTable.svelte";
   import VisitChart from "../components/VisitCharts.svelte";
+  import VisitTrend from "../components/VisitTrend.svelte";
+  import VisitWeather from "../components/VisitWeather.svelte";
   import PlacemarkImage from "../components/PlacemarkImage.svelte";
   import { getContext, onMount } from "svelte";
   
@@ -45,7 +47,6 @@
 
   onMount(async () => {
     placemark = await placemarkService.getPlacemarkById(params.id);
-    console.log(placemark);
     visits = await placemarkService.getPlacemarkVisits(params.id);
     activities = await placemarkService.getActivities();
   });
@@ -56,6 +57,9 @@
   <h1 class="title">{params.name}</h1>
 </div>
 <VisitChart bind:this={visitChart} id={params.id}/>
+<VisitTrend id={params.id}/>
+<VisitWeather id={params.id}/>
+
 
 <section class="section columns is-vcentered">
   <div class="column has-text-centered">
