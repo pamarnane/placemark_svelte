@@ -1,6 +1,6 @@
 <script>
   import AddPlacemarkForm from "../components/AddPlacemarkForm.svelte";
-  import WelcomeMenu from "../components/WelcomeMenu.svelte";
+  import UserMenu from "../components/UserMenu.svelte";
   import {getContext, onMount} from 'svelte';
   import PlacemarkMap from "../components/PlacemarkMap.svelte"
 import { push } from "svelte-spa-router";
@@ -32,7 +32,7 @@ import { push } from "svelte-spa-router";
 </script>
 
 
-<WelcomeMenu/>
+<UserMenu/>
 <PlacemarkMap bind:this={placemarkMap}/>
 <AddPlacemarkForm bind:value={placemarks} on:message={placemarkAdded}/>
 

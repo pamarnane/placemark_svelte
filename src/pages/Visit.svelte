@@ -1,5 +1,5 @@
 <script>
-  import WelcomeMenu from "../components/WelcomeMenu.svelte";
+  import UserMenu from "../components/UserMenu.svelte";
   import VisitTable from "../components/VisitTable.svelte";
   import VisitChart from "../components/VisitCharts.svelte";
   import VisitTrend from "../components/VisitTrend.svelte";
@@ -52,10 +52,7 @@
   });
 </script>
 
-<WelcomeMenu/>
-<div class="container">
-  <h1 class="title">{params.name}</h1>
-</div>
+<UserMenu name={params.name}/>
 <VisitChart bind:this={visitChart} id={params.id}/>
 <VisitTrend id={params.id}/>
 <VisitWeather id={params.id}/>
