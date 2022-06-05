@@ -32,8 +32,8 @@ import { push } from "svelte-spa-router";
 </script>
 
 
-<UserMenu/>
-<PlacemarkMap bind:this={placemarkMap}/>
+<UserMenu name=""/>
+<PlacemarkMap bind:this={placemarkMap}  id={userID}/>
 <AddPlacemarkForm bind:value={placemarks} on:message={placemarkAdded}/>
 
 <table class="table is-fullwidth">

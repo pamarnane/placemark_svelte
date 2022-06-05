@@ -59,7 +59,7 @@
 </script>
 
 <div class="card">
-  {#if url_render}
+  {#if url_render !== '...'}
     <div class="card-image">
       <figure class="image is-256x256">
         <img src={url_render}>
@@ -83,7 +83,7 @@
           </label>
         </div>
         <p>
-          {#if url_render}
+          {#if url_render !== '...'}
             <button on:click|once={deleteImage(url_render)} class="button is-danger is-outlined"><span>Delete</span><span class="icon is-small"><i class="fas fa-times"></i></span></button>
           {/if}
       </p>

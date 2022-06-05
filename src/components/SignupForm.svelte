@@ -13,7 +13,7 @@
     async function signup() {
       let success = await placemarkService.signup(firstName, lastName, email, password)
       if (success) {
-        push("/dashboard");
+        push("/");
       } else {
         errorMessage = "Error Trying to sign up";
       }

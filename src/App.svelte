@@ -8,7 +8,7 @@
   import Visit from "./pages/Visit.svelte";
   import Router from "svelte-spa-router";
 
-  setContext("PlacemarkService", new PlacemarkService("http://localhost:4000"));
+  setContext("PlacemarkService", new PlacemarkService("https://shielded-beach-11659.herokuapp.com"));
 
   let routes = {
     "/": Main,

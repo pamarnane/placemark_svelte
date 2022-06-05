@@ -30,4 +30,6 @@
   </div>
 </nav>
 
+{#if name}
 <h1 class="title" style="text-align:center">{name}</h1>
+{/if}

@@ -9,6 +9,8 @@
       zoom: 7,
       minZoom: 1,
     };
+
+    export let id;
     let map =null;
     
     
@@ -24,7 +26,7 @@
         );
         map.showLayerControl();
 
-        const placemarks = await placemarkService.getPlacemarks();
+        const placemarks = await placemarkService.getUserPlacemarks(id);
         placemarks.forEach(placemark => {
         addPlacemarkMarker(placemark);
         });

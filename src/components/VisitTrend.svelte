@@ -36,8 +36,7 @@ async function getWeatherData(id) {
 }
 
 onMount(async () => {
-    //let placemark = await placemarkService.getPlacemarkById(id);
-    result = await getWeatherData(id);
+    result = await placemarkService.getPlacemarkWeather(id);
     currentTemp = result.current.temp;
     currentWeather = result.current.weather[0].main;
     dailyWeather = result.daily;
@@ -53,5 +52,6 @@ onMount(async () => {
     data = data;
   });
 </script>
+
 
 <Chart data={data} type="axis-mixed" title="Last 7 Day Trends"/>
