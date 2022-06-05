@@ -23,7 +23,8 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button" id="logout" href="/" on:click={logout}> Log Out 
+          <a class="button" id="Dashboard" href="/#/dashboard">Dashboard</a>
+          <a class="button" id="logout" href="/" on:click={logout}>Log Out</a>
         </div>
       </div>
     </div>
